@@ -14,10 +14,39 @@
   <audio id="music" src="pizzatime.mp3" loop></audio>
 
   <script>
-    document.getElementById("start").onclick = function() {
-      document.getElementById("popup").style.display = "none";
-      document.getElementById("pizza").style.display = "block";
-      document.getElementById("music").play();
+    const startBtn = document.getElementById("start");
+    const popup = document.getElementById("popup");
+    const pizza = document.getElementById("pizza");
+    const music = document.getElementById("music");
+
+    // trys to block closing
+    window.onbeforeunload = function() {
+      return "You can't leave. It's pizza time.";
+    };
+
+    // Disable right-click
+    window.addEventListener('contextmenu', e => e.preventDefault());
+
+    // Trys to focus
+    setInterval(() => {
+      window.focus();
+    }, 500);
+
+    startBtn.onclick = function() {
+      popup.style.display = "none";
+      pizza.style.display = "block";
+      music.play();
+
+      // trys to fullscreen
+      if (pizza.requestFullscreen) {
+        pizza.requestFullscreen();
+      } else if (pizza.webkitRequestFullscreen) {
+        pizza.webkitRequestFullscreen();
+      } else if (pizza.mozRequestFullScreen) {
+        pizza.mozRequestFullScreen();
+      } else if (pizza.msRequestFullscreen) {
+        pizza.msRequestFullscreen();
+      }
     };
   </script>
 
