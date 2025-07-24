@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Pizza Time</title>
+</head>
+<body style="margin:0;padding:0;overflow:hidden;">
+
+  <div id="popup">
+    <button id="start">Start</button>
+  </div>
+
+  <img id="pizza" src="pizza.jpg" style="display:none; width:100vw; height:100vh; object-fit:cover;">
+  <audio id="music" src="pizzatime.mp3" loop></audio>
+
+  <script>
+    document.getElementById("start").onclick = function() {
+      document.getElementById("popup").style.display = "none";
+      document.getElementById("pizza").style.display = "block";
+      document.getElementById("music").play();
+    };
+  </script>
+
+</body>
+</html>
